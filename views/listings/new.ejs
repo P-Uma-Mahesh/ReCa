@@ -1,0 +1,57 @@
+<% layout('layouts/boilerplate.ejs') %>
+<body>
+    <div class="row">
+        <div class="col-8 offset-2">
+    <form method="POST"   action="/addproduct" enctype="multipart/form-data">
+        <br><br>
+           <h1>Add Item</h1>
+           <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" name="listing[title]" placeholder="enter the title" class="form-control">
+           </div>
+            <br>
+            <div class="mb-3">
+                <label for="description" class="form-label">About</label>
+                <textarea name="listing[description]" placeholder="enter the desc" class="form-control"></textarea>
+            </div>
+            <br>
+            <div class="mb-3">
+                <label for="image" class="form-label">Image</label>
+                <input type="file" name="image" class="form-control" required>
+            </div>
+            <br>
+            <div class="mb-3">
+                <label for="price" class="form-label">Price</label>
+                <input type="number" name="listing[price]" placeholder="enter the amount" class="form-control"></textarea>
+            </div>
+            <br>
+            <div class="row">
+                <div class="mb-3 col-md-4">
+                    <select class="form-select" aria-label="Default select example" name="listing[branch]">
+                        <option selected>select the branch</option>
+                        <option value="cse">CSE</option>
+                        <option value="general">general</option>
+                      </select>
+                </div>
+            
+                <br>
+                 <div class="mb-3 col-md-8">
+                    <select class="form-select" aria-label="Default select example" name="listing[category]">
+                        <option selected>select the category</option>
+                        <option value="books">books</option>
+                        <option value="accessories">Accessories</option>
+                      </select>
+                </div>
+            </div>
+           
+            <br>
+      
+           <div>
+            <button class="btn btn-outline-primary">submit</button>
+           </div>
+           <br><br>
+    </form>
+   </div>
+</div>
+</body>
+</html>

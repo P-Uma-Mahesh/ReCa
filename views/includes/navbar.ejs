@@ -1,0 +1,118 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom sticky-top">
+  <div class="container-fluid">
+      <a class="navbar-brand mb-0 h1" href="/reca/home"><i class="fa-solid fa-cart-shopping"></i>RECA</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="/reca/home">Home</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="/reca/user">My Account</a>
+              </li>
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="mainDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Products
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="mainDropdown">
+                    <li class="dropdown-submenu">
+                      <a class="dropdown-item dropdown-toggle" href="#">General</a>
+                      <ul class="dropdown-menu">
+                          <li><a class="dropdown-item"  href="http://localhost:8080/reca/products/general/books">books</a></li>
+                          <li><a class="dropdown-item"  href="http://localhost:8080/reca/products/general/accessories">accessories</a></li>
+                      </ul>
+                  </li>
+                      <li class="dropdown-submenu">
+                          <a class="dropdown-item dropdown-toggle" href="#">CSE</a>
+                          <ul class="dropdown-menu">
+                              <li><a class="dropdown-item" href="http://localhost:8080/reca/products/cse/books">Books</a></li>
+                              <li><a class="dropdown-item" href="http://localhost:8080/reca/products/cse/accessories">Accessories</a></li>
+                          </ul>
+                      </li>
+                  </ul>
+              </li>
+              
+          </ul>
+          <form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-primary" type="submit">Search</button>
+          </form>
+          <div class="user-icon">
+            
+                <ul >
+                    <a href="http://localhost:8080/reca/mycart" class="cart-symbol">
+                        <i class="fas fa-shopping-cart fa-xl"></i>
+                    </a>
+                  <a href="http://localhost:8080/reca/user" class="user-symbol" ><i class="fa-solid fa-circle-user fa-2xl"></i></a> 
+                 </ul>
+
+          </div>
+         
+          
+           <!-- <ul >
+            <i class="fa-regular fa-user"></i>
+           </ul> -->
+            
+        
+
+          <!-- </div>
+          <li>
+            <a href=""><i class="fa-solid fa-user"></a> 
+          </li>
+          </div> -->
+  </div>
+</nav>
+
+<script>
+  // Optional: Add JavaScript to handle dropdown-submenu functionality
+  document.addEventListener('DOMContentLoaded', function () {
+      document.querySelectorAll('.dropdown-submenu .dropdown-toggle').forEach(function (dropdownToggle) {
+          dropdownToggle.addEventListener('click', function (e) {
+              e.preventDefault();
+              e.stopPropagation();
+              let nextElement = this.nextElementSibling;
+              if (nextElement && nextElement.classList.contains('dropdown-menu')) {
+                  nextElement.classList.toggle('show');
+              }
+          });
+      });
+  });
+  
+</script>
+
+<style>
+  /* Optional: Add custom CSS to style nested dropdowns */
+  .dropdown-submenu {
+      position: relative;
+  }
+
+  .dropdown-submenu .dropdown-menu {
+      top: 0;
+      left: 100%;
+      margin-top: -6px;
+  }
+
+  .dropdown-menu > .dropdown-submenu > .dropdown-menu {
+      display: none;
+  }
+
+  .dropdown-menu > .dropdown-submenu > .dropdown-menu.show {
+      display: block;
+  }
+  .user-icon{
+          align-items: center;
+          margin-top: 1rem ; 
+  }
+  .cart-symbol{
+    margin-right: 1rem;
+   
+  }
+  
+    
+  
+  .user-icon a{
+    height: 5rem !important;
+  }
+</style>

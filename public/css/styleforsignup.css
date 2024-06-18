@@ -1,0 +1,105 @@
+body {
+    margin-top: 5rem !important;
+    font-family: Arial, sans-serif;
+    background: url('../others/books.jpg') no-repeat center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    width: 40% !important; /* 80% of the viewport width */
+    max-width: 600px; /* Maximum width */
+    height: auto; /* Adjusts height according to content */
+    max-height: 120vh; 
+    /* Maximum height */
+    margin-bottom: 2rem;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 3%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /*Enables vertical scrolling if content exceeds max-height*/
+    transition-duration: 1s;
+}
+.container:hover{
+     box-shadow: 0 0 1rem rgb(76, 155, 228);
+}
+
+h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+p {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+.signup-form {
+    margin-bottom: 1rem;
+}
+
+.signup-form label {
+    display: block;
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.signup-form input {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.signup-form input{
+    transition-duration: 0.5s;
+    
+}
+.signup-form input:hover{
+    box-shadow: 0 0 1rem #4498f1 ;
+}
+
+.button {
+    display: inline-block;
+    padding: 0.75rem 1rem;
+    font-size: 1.2rem;
+    color: white;
+    background-color: #007BFF;
+    border-radius: 4px;
+    transition-duration: 0.7s;
+    border: none;
+    cursor: pointer;
+    margin-top: 1.5rem;
+}
+
+.button:hover {
+    background-color: #0056b3;
+    border-radius: 1rem;
+}
+
+/* Typing animation CSS */
+.typing-animation {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 0.15em solid #333;
+    animation: typing 3s steps(30, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: #333; }
+}

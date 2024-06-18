@@ -1,0 +1,44 @@
+<% layout('layouts/boilerplate.ejs') %>
+
+<h1>User Details</h1>
+<div class="user-details">
+  <p><strong>Name:</strong> <%= user.name %></p>
+  <p><strong>Email:</strong> <%= user.email %></p>
+</div>
+
+<div class="toggle-container">
+  <button id="toggle-orders" class="toggle-button active">Ordered Items</button>
+  <button id="toggle-sold" class="toggle-button">Sold Items</button>
+</div>
+
+<div id="ordered-items" class="items-list active">
+  <h2>Ordered Items</h2>
+  <% if (orderedItems.length === 0) { %>
+    <p>No ordered items.</p>
+  <% } else { %>
+    <div class="items-container">
+      <% orderedItems.forEach(item => { %>
+        <div class="item-card">
+          <h3><%= item.title %></h3>
+          <p>Price: <i class="fa-solid fa-indian-rupee-sign"></i><%= item.price.toLocaleString("en-IN") %></p>
+        </div>
+      <% }); %>
+    </div>
+  <% } %>
+</div>
+
+<div id="sold-items" class="items-list">
+  <h2>Sold Items</h2>
+  <% if (soldItems.length === 0) { %>
+    <p>No sold items.</p>
+  <% } else { %>
+    <div class="items-container">
+      <% soldItems.forEach(item => { %>
+        <div class="item-card">
+          <h3><%= item.title %></h3>
+          <p>Price: <i class="fa-solid fa-indian-rupee-sign"></i><%= item.price.toLocaleString("en-IN") %></p>
+        </div>
+      <% }); %>
+    </div>
+  <% } %>
+</div>

@@ -1,0 +1,39 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+
+.page-title {
+    margin-bottom: 30px;
+    text-align: center;
+    color: #343a40;
+}
+
+.btn-group .btn {
+    margin-right: 10px;
+}
+
+.management-section {
+    margin-top: 30px;
+}
+
+.filter-options {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.table th, .table td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.btn-check:checked + .btn, .btn-check:active + .btn, .btn-check:focus + .btn {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-check + .btn:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}

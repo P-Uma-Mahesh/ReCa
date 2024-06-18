@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+    <link rel="stylesheet" href="/css/styleforadmin.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+    <%- include("../includes/navbar.ejs") %>
+
+    <div class="container mt-5">
+        <h1 class="page-title">Admin Dashboard</h1>
+
+        <div class="btn-group" role="group" aria-label="Toggle Management Sections">
+            <input type="radio" class="btn-check" name="options" id="usersOption" autocomplete="off" onclick="showSection('users')">
+            <label class="btn btn-primary" for="usersOption">Users</label>
+
+            <input type="radio" class="btn-check" name="options" id="productsOption" autocomplete="off" onclick="showSection('products')">
+            <label class="btn btn-primary" for="productsOption">Products</label>
+
+            <input type="radio" class="btn-check" name="options" id="ordersOption" autocomplete="off" onclick="showSection('orders')">
+            <label class="btn btn-primary" for="ordersOption">Orders</label>
+        </div>
+
+        <div id="users-section" class="management-section">
+            <h2>Manage Users</h2>
+            <div class="filter-options">
+                <input type="text" id="userFilter" class="form-control" placeholder="Filter by name or email">
+                <button class="btn btn-outline-secondary" onclick="filterUsers()">Filter</button>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <!-- <th>Actions</th> -->
+                    </tr>
+                </thead>
+                <tbody id="userTable">
+                    <% users.forEach(user => { %>
+                        <tr>
+                            <td><%= user.name %></td>
+                            <td><%= user.email %></td>
+                            <!-- <td>
+                                <button class="btn btn-warning" onclick="editUser('<%= user._id %>')">Edit</button>
+                                <button class="btn btn-danger" onclick="removeUser('<%= user._id %>')">Remove</button>
+                            </td> -->
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+            <p>Total No of users:<%= users.length %></p>
+        </div>
+
+        <div id="products-section" class="management-section" style="display: none;">
+            <h2>Manage Products</h2>
+            <div class="filter-options">
+                <input type="text" id="productFilter" class="form-control" placeholder="Filter by title or category">
+                <button class="btn btn-outline-secondary" onclick="filterProducts()">Filter</button>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Branch</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="productTable">
+                    <% products.forEach(product => { %>
+                        <tr>
+                            <td><%= product.title %></td>
+                            <td><%= product.branch %></td>
+                            <td><%= product.category %></td>
+                            <td><%= product.price %></td>
+                            <td>
+                                <button class="btn btn-warning" onclick="editProduct('<%= product._id %>')">Edit</button>
+                                <button class="btn btn-danger" onclick="removeProduct('<%= product._id %>')">Remove</button>
+                            </td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+            <p>Total No of products:<%= products.length %></p>
+        </div>
+
+        <div id="orders-section" class="management-section" style="display: none;">
+            <h2>Manage Orders</h2>
+            <div class="filter-options">
+                <input type="text" id="orderFilter" class="form-control" placeholder="Filter by order ID or user">
+                <button class="btn btn-outline-secondary" onclick="filterOrders()">Filter</button>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>User</th>
+                        <th>Total Amount</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="orderTable">
+                    <% orders.forEach(order => { %>
+                        <tr>
+                            <td><%= order._id %></td>
+                            <td><%= order.user.name %></td>
+                            <td><%= order.totalAmount %></td>
+                            <td><%= order.status %></td>
+                            <td>
+                                <button class="btn btn-success" onclick="markAsDelivered('<%= order._id %>')">Delivered</button>
+                            </td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+        function showSection(section) {
+            document.getElementById('users-section').style.display = 'none';
+            document.getElementById('products-section').style.display = 'none';
+            document.getElementById('orders-section').style.display = 'none';
+
+            if (section === 'users') {
+                document.getElementById('users-section').style.display = 'block';
+            } else if (section === 'products') {
+                document.getElementById('products-section').style.display = 'block';
+            } else if (section === 'orders') {
+                document.getElementById('orders-section').style.display = 'block';
+            }
+        }
+
+        function filterUsers() {
+            // Implement filtering logic here
+        }
+
+        function filterProducts() {
+            // Implement filtering logic here
+        }
+
+        function filterOrders() {
+            // Implement filtering logic here
+        }
+
+        function editUser(userId) {
+            window.location.href = `/admin/users/edit/${userId}`;
+        }
+
+        function removeUser(userId) {
+            if (confirm('Are you sure you want to remove this user?')) {
+                fetch(`/admin/users/remove/${userId}`, { method: 'DELETE' })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            location.reload();
+                        } else {
+                            alert('Error removing user');
+                        }
+                    });
+            }
+        }
+
+        function editProduct(productId) {
+        
+            window.location.href = `/listings/${productId}/edit`;
+        }
+
+        function removeProduct(productId) {
+            if (confirm('Are you sure you want to remove this product?')) {
+                fetch(`/admin/products/remove/${productId}`, { method: 'DELETE' })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            location.reload();
+                        } else {
+                            alert('Error removing product');
+                        }
+                    });
+            }
+        }
+
+        function markAsDelivered(orderId) {
+            fetch(`/admin/orders/deliver/${orderId}`, { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        location.reload();
+                    } else {
+                        alert('Error marking order as delivered');
+                    }
+                });
+        }
+    </script>
+</body>
+</html>
