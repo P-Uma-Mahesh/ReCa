@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const express=require('express');
 const app=express();
 const mongoose =require('mongoose');
@@ -22,6 +24,7 @@ const cookieparser=require('cookie-parser');
 const { decode } = require('punycode');
 const WrapAsync = require('./utils/WrapAsync.js');
 const Razorpay = require('razorpay');
+const port=process.env.PORT;
 
 
 
@@ -38,7 +41,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use(methodOverride("_method"));
 app.use(cookieparser())
-const MONGO_URL="mongodb://localhost:27017/reca";
+const MONGO_URL=process.env.MONGO_URL;
 
 function generateToken(User) {
   return jwt.sign({ id: User._id ,role:User.role}, 'umamaheshjkhdwehuirh');
@@ -504,6 +507,6 @@ function restrictTo(roles=[]){
     return next();
   }
 }
-app.listen(8080,()=>{
+app.listen(port,()=>{
     console.log("vintunna");
 });
