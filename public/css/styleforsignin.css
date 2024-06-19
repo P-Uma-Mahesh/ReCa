@@ -1,9 +1,7 @@
 body {
-    margin:0;
+    margin: 0;
     font-family: Arial, sans-serif;
-    /* background: url('../others/books.jpg') no-repeat center center fixed;
-    background-size: contain; */
-    background: url('../others/books.jpg') no-repeat  center fixed;
+    background: url('../others/books.jpg') no-repeat center fixed;
     background-size: cover;
     display: flex;
     justify-content: center;
@@ -12,10 +10,10 @@ body {
 }
 
 .container {
-    width: 40% !important; /* 80% of the viewport width */
-    max-width: 700px; /* Maximum width */
-    height: auto; /* Adjusts height according to content */
-    max-height: 90vh; /* Maximum height */
+    width: 40%;
+    max-width: 700px;
+    height: auto;
+    max-height: 90vh;
     text-align: center;
     background: rgba(255, 255, 255, 0.1);
     padding: 3%;
@@ -23,8 +21,8 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition-duration: 1s;
 }
-.container:hover{
-     box-shadow: 0 0 1rem rgb(76, 155, 228);
+.container:hover {
+    box-shadow: 0 0 1rem rgb(76, 155, 228);
 }
 
 h1 {
@@ -48,17 +46,14 @@ h1 {
     width: 100%;
     padding-right: 2rem;
     margin-bottom: 1rem;
- 
     border: 1px solid #ccc;
     border-radius: 4px;
     height: 2rem;
-}
-.signup-form input{
     transition-duration: 0.5s;
-    
 }
-.signup-form input:hover{
-    box-shadow: 0 0 1rem #4498f1 ;
+
+.signup-form input:hover {
+    box-shadow: 0 0 1rem #4498f1;
 }
 
 .button {
@@ -79,10 +74,11 @@ h1 {
     border-radius: 1rem;
 }
 
-.forgot-link{
+.forgot-link {
     text-decoration: none;
     color: white !important;
 }
+
 /* Typing animation CSS */
 .typing-animation {
     display: inline-block;
@@ -100,4 +96,54 @@ h1 {
 @keyframes blink-caret {
     from, to { border-color: transparent; }
     50% { border-color: #333; }
+}
+
+/* Media Queries for Responsive Design */
+
+/* For Large Screens / Desktops */
+@media (min-width: 1025px) {
+    .container {
+        width: 40% !important;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    .button {
+        font-size: 1.2rem;
+    }
+}
+
+/* For Tablets */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .container {
+        width: 60% !important;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .button {
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+    }
+}
+
+/* For Mobile Phones */
+@media (max-width: 768px) {
+    .container {
+        width: 90% !important;
+        padding: 2%;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .button {
+        font-size: 0.9rem;
+        padding: 0.5rem 0.75rem;
+    }
 }
