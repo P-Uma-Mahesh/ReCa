@@ -65,10 +65,7 @@ app.get("/reca/signin",(req,res)=>{
        res.render("welcome/signin.ejs",{message:null});
 });
 app.get("/reca/signup",async (req,res)=>{
-  const token=req.cookies?.uid;
- const decoded= jwt.verify(token, 'umamaheshjkhdwehuirh');
  
- let user=await User.findById(decoded.id);
     res.render("welcome/signup.ejs",{});
 });
 app.post("/reca/signup", async (req,res)=>{
