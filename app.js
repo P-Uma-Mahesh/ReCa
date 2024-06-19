@@ -85,7 +85,7 @@ app.post("/reca/signup", async (req,res)=>{
     });
     newuser.save()
     .then((result)=>{
-      res.redirect("reca/signin");
+      res.redirect("/reca/signin");
     })
     .catch((err)=>{
       res.send(err);
@@ -423,11 +423,11 @@ app.put("/listings/:id",async (req,res)=>{
      await Product.findByIdAndUpdate(id,{...req.body.listing});
      res.redirect(`/listings/${id}`);
 });
-app.put("/listings/:id",async (req,res)=>{
+app.put("/admin/listings/:id",async (req,res)=>{
   let {id}=req.params;
   let listing=req.body.listing;
   await Product.findByIdAndUpdate(id,{...req.body.listing});
-  res.redirect(`/listings/${id}`);
+  res.redirect(`/reca/admin`);
 });
 //delete route
 app.delete("/listings/:id", async (req,res)=>{
@@ -446,7 +446,7 @@ app.get("/reca/products/:branch/:category", async (req, res) => {
     console.log("API received");
     const { branch, category } = req.params;
     console.log(branch,category);
-    let allListings = await Listing.find({ branch, category });
+    let allListings = await Product.find({ branch, category });
     res.render("listings/index.ejs", { allListings });
 
 
