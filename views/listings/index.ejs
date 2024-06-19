@@ -1,7 +1,10 @@
 <% layout('layouts/boilerplate.ejs') %>
 
-<h1>All Listings</h1>
-<div class="row row-cols-lg-5 row-cols-md-2 row-cols-sm-1">
+<% if (allListings.length === 0) { %>
+    <p class="empty-cart">No Products found.</p>
+<% } else { %>
+<h1>Products</h1>
+<div class="row row-cols-lg-4 row-cols-md-2 row-cols-sm-1">
       <% for (let listing of allListings) { %>
     <div class="card">
         <img class="card-img-top" src="<%= listing.image %>" style="height: 10rem;" alt="Card image cap">
@@ -25,5 +28,6 @@
     </div>
     <% } %>
 </div>
+<% } %>
 
 <script src="/js/jsforaddtocart.js"></script>
