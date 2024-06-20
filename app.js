@@ -68,29 +68,57 @@ app.get("/reca/signup",async (req,res)=>{
  
     res.render("welcome/signup.ejs",{});
 });
-app.post("/reca/signup", async (req,res)=>{
-    let {name,email,rollno,phono,password}=req.body;
-  const salt = await bcrypt.genSalt(10);
-  const newPassword = await bcrypt.hash(password, salt);
-    let newuser=new User({
-      name:`${name}`,
-      email:`${email}`,
-      phono:`${phono}`,
-      rollno:`${rollno}`,
-      password:`${newPassword}`,
-      role:'NORMAL',
-      otp:null,
-      otpExpiration: null,
+const validatePhoneNumber = (phoneNumber) => {
+  // Validate phone number format (10 digits)
+  return /^\d{10}$/.test(phoneNumber);
+};
 
+const validateRollNumber = (rollNumber) => {
+  // Validate roll number format (11 characters, first two > 19)
+  if (rollNumber.length !== 10) return false;
+  const firstTwoDigits = rollNumber.substring(0, 2);
+  return /^\d+$/.test(firstTwoDigits) && parseInt(firstTwoDigits) > 19;
+};
+
+app.post("/reca/signup", async (req, res) => {
+  let { name, email, rollno, phono, password } = req.body;
+
+  if (!validateRollNumber(rollno)) {
+    return res.status(400).render('welcome/signup.ejs', { message: 'Invalid roll number' });
+  }
+  // Validate phone number
+  if (!validatePhoneNumber(phono)) {
+    return res.status(400).render('welcome/signup.ejs', { message: 'Invalid phone number' });
+  }
+
+  // Validate roll number
+  
+
+  // If validations pass, proceed with hashing password and saving user
+  try {
+    const salt = await bcrypt.genSalt(10);
+    const newPassword = await bcrypt.hash(password, salt);
+
+    let newuser = new User({
+      name: `${name}`,
+      email: `${email}`,
+      phono: `${phono}`,
+      rollno: `${rollno}`,
+      password: `${newPassword}`,
+      role: 'NORMAL',
+      otp: null,
+      otpExpiration: null,
     });
-    newuser.save()
-    .then((result)=>{
-      res.redirect("/reca/signin");
-    })
-    .catch((err)=>{
-      res.send(err);
-    });  
+
+    await newuser.save(); // Use await to properly handle asynchronous operations
+
+    res.redirect("/reca/signin");
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
 });
+
+
 app.post("/reca/signin", async (req, res) => {
     console.log("signin");
     const { rollno, password } = req.body;
