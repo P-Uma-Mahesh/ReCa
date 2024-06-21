@@ -344,7 +344,8 @@
   
   app.post('/reca/cart/remove',wrapAsync(async(req,res)=>{
     const  productId  = req.body.productId;
-    let user = await getUser(req.cookies).populate('cart');
+    const reqUser=await getUser(req.cookies);
+    let user =await reqUser.populate('cart');
     console.log(productId);
     user.cart.remove(productId);
     user.save();
