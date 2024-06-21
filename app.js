@@ -235,10 +235,10 @@
   }));
   app.get("/reca/mycart",wrapAsync(async (req, res) => {
     try{
-      
-      const user=await getUser(req.cookies).populate("cart");
-     
+      const reqUser=await getUser(req.cookies);
+      const user= await reqUser.populate("cart");
       let cartItems=user.cart;
+      console.log(cartItems);
       let totalAmount = cartItems.reduce((total, item) => {
         return total + (item.price ); // assuming item.price and item.quantity
       }, 0);
@@ -250,7 +250,8 @@
   }));
   app.get("/reca/user", wrapAsync(async (req, res) => {
     try {
-      const user = await getUser(req.cookies).populate([{
+      const reqUser=await getUser(req.cookies)
+      const user = await reqUser.populate([{
         path: "products",
         model: "Product",
       }, {
