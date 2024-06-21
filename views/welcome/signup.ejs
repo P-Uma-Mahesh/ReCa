@@ -11,7 +11,9 @@
 <body>
     <div class="container">
         <h1 class="typing-animation">Sign Up</h1>
-       
+        <% if(message) { %>
+            <p style="color: red;"><%= message %></p>
+        <% } %>
         <form id="signupForm" method="post" action="/reca/signup" class="signup-form needs-validation">
             <div class="mb-3 " style="text-align: start;">
                 <label for="name" class="form-label">Name</label>
