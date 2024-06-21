@@ -77,7 +77,7 @@
   }));
   app.get("/reca/signup",wrapAsync(async (req,res)=>{
     
-      res.render("welcome/signup.ejs",{});
+      res.render("welcome/signup.ejs",{message:null});
   }));
   const validatePhoneNumber = (phoneNumber) => {
     // Validate phone number format (10 digits)
