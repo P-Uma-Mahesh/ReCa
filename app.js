@@ -220,7 +220,7 @@
     user.otpExpiration = undefined;
     await user.save();
   
-    res.redirect("reca/signin.ejs");
+    res.redirect("/reca/signin.ejs");
     
   }));
   
