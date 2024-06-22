@@ -32,7 +32,7 @@ async function handleCheckout() {
     const order = await response.json();
 
     const options = {
-        key: 'rzp_test_gNWykseo15tPUR', // Use the correct key from Razorpay dashboard
+        key: 'rzp_live_1j2EriedZMsgq4', // Use the correct key from Razorpay dashboard
         amount: order.amount,
         currency: order.currency,
         name: 'RECA',
