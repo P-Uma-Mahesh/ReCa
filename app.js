@@ -130,13 +130,13 @@
   });
   
   app.post("/reca/signin",wrapAsync(async (req, res) => {
-      console.log("signin");
+    
       const { rollno, password } = req.body;
-      console.log(password, rollno);
+      
     
       try {
         const user = await User.findOne({ rollno: `${rollno}` });
-        console.log(user);
+        
         if (!user) {
           return res.render('welcome/signin.ejs',{message:'Invalid user'});
         }
@@ -165,9 +165,9 @@
   }));
   app.post('/reca/send-otp',wrapAsync( async (req, res) => {
     const { rollno, phono} = req.body;
-    console.log(rollno,phono);
+   
     const user = await User.findOne({ rollno, phono });
-    console.log(user);
+    
     if (!user) {
         return res.status(404).send('User not found');
     }
@@ -183,7 +183,7 @@
     user.otp = otp;
     user.otpExpiration = Date.now() + 3600000; // OTP valid for 1 hour
     await user.save();
-    console.log(user.email);
+   
   
     // Send OTP via email using NodeMailer
     const mail_configs = {
@@ -207,8 +207,6 @@
   app.post('/reca/reset-password',wrapAsync( async (req, res) => {
     const { otp, newPassword } = req.body;
     const user = await User.findOne({ otp, otpExpiration: { $gt: Date.now() } });
-    console.log( otp, newPassword);
-    console.log(user);
     if (!user) {
         return res.status(400).send('Invalid OTP or OTP has expired');
     }
@@ -346,11 +344,9 @@
     const  productId  = req.body.productId;
     const reqUser=await getUser(req.cookies);
     let user =await reqUser.populate('cart');
-    console.log(productId);
     user.cart.remove(productId);
     user.save();
     let cartItems=user.cart;
-    console.log(cartItems);
     res.redirect("/reca/mycart");
   
   }));
@@ -361,7 +357,6 @@
   });
   //create order
   app.post('/create-order', wrapAsync(async (req, res) => {
-    console.log("order received");
     const { amount, currency, receipt } = req.body;
   
     const options = {
@@ -479,7 +474,6 @@
   });
   //edit route
   app.get("/listings/:id/edit",wrapAsync(async (req,res)=>{
-        console.log("update received");
         let {id}=req.params;
         console.log(id);
         const listing= await Product.findById(id);
@@ -524,10 +518,7 @@
   
   // reca products
   app.get("/reca/products/:branch/:category", wrapAsync(async (req, res) => {
-      
-      console.log("API received");
       const { branch, category } = req.params;
-      console.log(branch,category);
       let allListings = await Product.find({ branch, category });
       res.render("listings/index.ejs", { allListings });
   
@@ -536,14 +527,11 @@
   app.get("/reca/products",wrapAsync(async(req,res)=>{
       let allListings=await Product.find({});
       res.render("listings/index.ejs",{allListings});
-  }));
-  
-  
+  })); 
   
   app.get("/listings/:id",wrapAsync(async (req,res)=>{
        let {id}=req.params;
        const listing= await Product.findById(id);
-  
        res.render("listings/show.ejs",{listing});
   }));
   
@@ -584,5 +572,5 @@
     }
   }
   app.listen(port,()=>{
-      console.log("vintunna");
+      console.log("Server is On");
   });
