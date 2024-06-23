@@ -20,7 +20,7 @@
       <% orderedItems.forEach(item => { %>
         <div class="item-card">
           <h3><%= item.title %></h3>
-          <p>Price: <i class="fa-solid fa-indian-rupee-sign"></i><%= item.price.toLocaleString("en-IN") %></p>
+          <p>Price: <i class="fa-solid fa-indian-rupee-sign"></i><%= item.price %></p>
         </div>
       <% }); %>
     </div>
@@ -28,16 +28,25 @@
 </div>
 
 <div id="sold-items" class="items-list">
-  <h2>Sold Items</h2>
+  <h2>Selling Items</h2>
   <% if (soldItems.length === 0) { %>
     <p>No sold items.</p>
   <% } else { %>
     <div class="items-container">
       <% soldItems.forEach(item => { %>
+        <% if(item.available){ %>
         <div class="item-card">
           <h3><%= item.title %></h3>
           <p>Price: <i class="fa-solid fa-indian-rupee-sign"></i><%= item.price.toLocaleString("en-IN") %></p>
-        </div>
+          <div class="d-flex justify-content-around">
+            <a href="/listings/<%= item._id %>/edit" class="btn btn-outline-primary btn-md  " role="button" aria-pressed="true">Edit</a>
+            <form action="/listings/<%= item.id %>?_method=DELETE" method="post">
+              <button class="btn btn-outline-danger btn-md " role="button" aria-pressed="true">Cancel</a>
+            </form>
+           
+          </div>
+          
+         <% } %>
       <% }); %>
     </div>
   <% } %>
