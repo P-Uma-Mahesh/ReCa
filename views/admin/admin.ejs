@@ -99,6 +99,7 @@
                     <tr>
                         <th>Order ID</th>
                         <th>User</th>
+                        <th>Products</th>
                         <th>Total Amount</th>
                         <th>Status</th>
                         <th>Actions</th>
@@ -109,10 +110,23 @@
                         <tr>
                             <td><%= order._id %></td>
                             <td><%= order.user.name %></td>
+                            <td>
+                                <% order.products.forEach(item => { %>
+                                    <button class="btn btn-info" type="button" data-bs-toggle="collapse" data-bs-target="#productDetails<%= item.product._id %>" aria-expanded="false" aria-controls="productDetails<%= item.product._id %>">
+                                        <%= item.product.title %>
+                                    </button>
+                                    <div class="collapse" id="productDetails<%= item.product._id %>">
+                                        <p><strong>Seller:</strong> <%= item.seller.name %></p>
+                                        <p><strong>Email:</strong> <%= item.seller.email %></p>
+                                        <p><strong>Phone:</strong> <%= item.seller.phono %></p>
+                                        <p><strong>Roll No:</strong> <%= item.seller.rollno %></p>
+                                    </div>
+                                <% }); %>
+                            </td>
                             <td><%= order.totalAmount %></td>
                             <td><%= order.status %></td>
                             <td>
-                                <button class="btn btn-danger" onclick="cancelOrder('<%= order._id %>')">Cancel</button> 
+                                <button class="btn btn-danger" onclick="cancelOrder('<%= order._id %>')">Cancel</button>
                                 <button class="btn btn-success" onclick="markAsDelivered('<%= order._id %>')">Delivered</button>
                             </td>
                         </tr>
@@ -121,7 +135,6 @@
             </table>
         </div>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script>
         function showSection(section) {
