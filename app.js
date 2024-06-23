@@ -434,13 +434,24 @@
       res.status(500).json({ success: false, error: err.message });
     }
   }));
-  app.get('/reca/admin',restrictTo(['ADMIN']),wrapAsync(async (req, res) => {
-    const users = await User.find({});
-    const products = await Product.find({});
-    const orders = await Order.find({status:"pending"}).populate('user');
-    res.render('admin/admin.ejs', { users, products, orders });
+ app.get('/reca/admin', restrictTo(['ADMIN']), wrapAsync(async (req, res) => {
+  const users = await User.find({});
+  const products = await Product.find({});
+  const orders = await Order.find({ status: "pending" })
+    .populate('user')
+    .populate('products');
+
+  // Fetching sellers for each product in the orders
+  const ordersWithSellers = await Promise.all(orders.map(async order => {
+    const productsWithSellers = await Promise.all(order.products.map(async product => {
+      const seller = await User.findOne({ products: product._id });
+      return { product, seller };
+    }));
+    return { ...order.toObject(), products: productsWithSellers };
   }));
-  
+
+  res.render('admin/admin.ejs', { users, products, orders: ordersWithSellers });
+}));
   app.delete("/admin/products/remove/:id", restrictTo(['ADMIN']), wrapAsync(async (req, res) => {
     let { id } = req.params;
     
@@ -463,15 +474,43 @@
         res.json({ success: false, error: err });
     }
   }));
-  app.get('/admin/orders/cancel/:id'), restrictTo(['ADMIN']), wrapAsync(async (req, res) => {
-    try {
-        console.log("do your want cancel the order");
-        await Order.findByIdAndUpdate(req.params.id, { status:'failed'});
-        res.json({ success: true });
-    } catch (err) {
-        res.json({ success: false, error: err });
+ app.get('/admin/orders/cancel/:id', restrictTo(['ADMIN']), wrapAsync(async (req, res) => {
+  try {
+    const orderId = req.params.id;
+     console.log(orderId);
+    // Find the order by ID
+    const order = await Order.findById(orderId);
+    console.log(order);
+    if (!order) {
+      return res.json({ success: false, error: 'Order not found' });
     }
-  });
+    // Remove the order ID from the user's orders array
+    const user = await User.findByIdAndUpdate(order.user, {
+      $pull: { orders: orderId }
+    }, { new: true });
+    console.log(user);
+    // Update the availability of each product in the order
+    await Promise.all(order.products.map(async (productId) => {
+      await Product.findByIdAndUpdate(productId, {
+        available: true
+      });
+    }));
+    // Remove the order from the Order schema
+    const deletedOrder = await Order.findByIdAndDelete(orderId);
+    if (!deletedOrder) {
+      console.error(`Failed to delete order: ${orderId}`);
+      return res.json({ success: false, error: 'Failed to delete order' });
+    }
+    
+    // Add an alert to the user
+    user.alerts.push(`Your order with ID ${orderId} has been cancelled.`);
+    await user.save();
+
+    res.json({ success: true });
+  } catch (err) {
+    res.json({ success: false, error: err.message });
+  }
+}));
   //edit route
   app.get("/listings/:id/edit",wrapAsync(async (req,res)=>{
         let {id}=req.params;
@@ -513,7 +552,7 @@
   app.delete("/listings/:id", wrapAsync(async (req,res)=>{
         let {id}=req.params;
         await Product.findByIdAndDelete(id);
-        res.redirect("/reca/products");
+        res.redirect("/reca/user");
   }));
   
   // reca products
