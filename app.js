@@ -586,7 +586,8 @@
   app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(err.status || 500);
-    res.render('error.ejs', { message: err.message });
+    //res.render('error.ejs', { message: err.message });
+      res.send("Error Occured");
   });
   //counting number of users
   async function countUsers() {
