@@ -117,12 +117,13 @@
                                     </button>
                                     <div class="collapse" id="productDetails<%= item.product._id %>">
                                        <% if (item.seller) { %>
+                                           <p><strong>Seller:</strong> <%= item.seller.name %></p>
                                         <p><strong>Email:</strong> <%= item.seller.email %></p>
                                         <p><strong>Phone:</strong> <%= item.seller.phono %></p>
                                         <p><strong>Roll No:</strong> <%= item.seller.rollno %></p>
- <% } else { %>
-            <p><strong>Seller information not available</strong></p>
-        <% } %>
+                                    <% } else { %>
+                                      <p><strong>Seller information not available</strong></p>
+                                    <% } %>
                                     </div>
                                 <% }); %>
                             </td>
