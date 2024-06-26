@@ -18,7 +18,12 @@ const productSchema = new mongoose.Schema({
   },
   category:String,
   branch:String,
+    available: {
+    type: Boolean,
+    default: true,
+  },
 });
+
 
 const Product = mongoose.model('Product', productSchema);
 
