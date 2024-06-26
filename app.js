@@ -497,6 +497,7 @@
     }));
     // Remove the order from the Order schema
     const deletedOrder = await Order.findByIdAndDelete(orderId);
+      console.log(deletedOrder);
     if (!deletedOrder) {
       console.error(`Failed to delete order: ${orderId}`);
       return res.json({ success: false, error: 'Failed to delete order' });
