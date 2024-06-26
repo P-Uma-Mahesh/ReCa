@@ -72,7 +72,7 @@ body{
     border-radius: 1rem !important;
     width: 100% !important;
     height: 13rem !important;
-    object-fit: cover !important;
+    object-fit: contain !important;
 }
 .card-body{
     padding:0 !important
@@ -188,7 +188,7 @@ body{
 .show-img{
     height: 100% !important;
     width: 100% !important;
-    object-fit: cover !important;
+    object-fit: contain !important;
     
 }
 .show-img-div{
