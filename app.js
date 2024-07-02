@@ -89,8 +89,12 @@
     if (rollNumber.length !== 10) return false;
     const firstTwoDigits = rollNumber.substring(0, 2);
     return /^\d+$/.test(firstTwoDigits) && parseInt(firstTwoDigits) > 19;
+    const sixthCharacter=rollNumber.charAt(5);
+    return /^[AMP]$/.test(sixthCharacter);  
   };
-  
+
+ const validatePassword=(password)=>{
+ };
   app.post("/reca/signup", async (req, res) => {
     let { name, email, rollno, phono, password } = req.body;
   
