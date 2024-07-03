@@ -235,6 +235,9 @@
       console.log("new page");
       res.render("listings/new.ejs",{});
   }));
+app.get("/reca/about",(req,res)=>{
+  res.render('about_us.ejs');
+});
   app.get("/reca/mycart",wrapAsync(async (req, res) => {
     try{
       const reqUser=await getUser(req.cookies);
