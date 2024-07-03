@@ -235,7 +235,7 @@
       console.log("new page");
       res.render("listings/new.ejs",{});
   }));
-app.get("/reca/about",(req,res)=>{
+app.get("/reca/aboutus",(req,res)=>{
   res.render('about_us.ejs');
 });
   app.get("/reca/mycart",wrapAsync(async (req, res) => {
