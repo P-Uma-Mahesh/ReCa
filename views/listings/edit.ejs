@@ -4,7 +4,7 @@
         <div class="col-8 offset-2">
     <form method="POST"   action="/listings/<%= listing._id %>?_method=PUT">
         <br><br>
-           <h1>Edit Item details</h1>
+           <h1>Edit Item Details</h1>
            <div class="mb-3">
             <label for="title"   class="form-label">Title</label>
             <input type="text" value="<%= listing.title %>" name="listing[title]" placeholder="Enter title" class="form-control">
@@ -28,8 +28,8 @@
             <div class="row">
                 <div class="mb-3 col-md-4">
                     <select class="form-select" aria-label="Default select example">
-                        <option selected>select the branch</option>
-                        <option value="General">General</option>
+                    
+                        <option value="General" selected>General</option>
                         <option value="CSE">CSE</option>
                         <option value="ECE">ECE</option>
                         <option value="EEE">EEE</option>
