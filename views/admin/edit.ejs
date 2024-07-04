@@ -11,35 +11,33 @@
            </div>
             <br>
             <div class="mb-3">
-                <label for="description" class="form-label">about</label>
+                <label for="description" class="form-label">About</label>
                 <textarea name="listing[description]" placeholder="enter the desc" class="form-control"><%= listing.description%></textarea>
             </div>
             <br>
             <div class="mb-3">
-                <label for="image" class="form-label">about</label>
-                <input name="listing[image]" value="<%= listing.image %>" placeholder="enter the url" class="form-control"></input>
+                <label for="image" class="form-label">Image</label>
+                <input name="listing[image]" value="<%= listing.image %>" placeholder="Enter the url" class="form-control"></input>
             </div>
             <br>
             <div class="mb-3">
                 <label for="price" class="form-label">about</label>
-                <input type="number" name="listing[price]" value="<%= listing.price %>" placeholder="enter the amount" class="form-control"></textarea>
+                <input type="number" name="listing[price]" value="<%= listing.price %>" placeholder="Enter the amount" class="form-control"></textarea>
             </div>
             <br>
             <div class="row">
                 <div class="mb-3 col-md-4">
                     <select class="form-select" aria-label="Default select example">
-                        <option selected>select the branch</option>
+                       <option value="General" selected>General</option>
                         <option value="CSE">CSE</option>
                         <option value="ECE">ECE</option>
-                        <option value="EEE">EEE</option>
                       </select>
                 </div>
             
                 <br>
                  <div class="mb-3 col-md-8">
                     <select class="form-select" aria-label="Default select example">
-                        <option selected>select the category</option>
-                        <option value="books">books</option>
+                        <option value="books" selected>Books</option>
                         <option value="Accessories">Accessories</option>
                       </select>
                 </div>
