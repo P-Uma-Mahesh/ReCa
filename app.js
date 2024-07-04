@@ -447,17 +447,17 @@ app.get("/reca/aboutus",(req,res)=>{
   const orders = await Order.find({ status: "pending" })
     .populate('user')
     .populate('products');
-
+  const ordersdelivered = await Order.find({ status: "delivered" });
   // Fetching sellers for each product in the orders
   const ordersWithSellers = await Promise.all(orders.map(async order => {
     const productsWithSellers = await Promise.all(order.products.map(async product => {
       const seller = await User.findOne({ products: product._id });
       return { product, seller };
     }));
-    return { ...order.toObject(), products: productsWithSellers };
+    return { ...order.toObject(), products: productsWithSellers,ordersdelivered };
   }));
 
-  res.render('admin/admin.ejs', { users, products, orders: ordersWithSellers });
+  res.render('admin/admin.ejs', { users, products, orders: ordersWithSellers,ordersdelivered });
 }));
   app.delete("/admin/products/remove/:id", restrictTo(['ADMIN']), wrapAsync(async (req, res) => {
     let { id } = req.params;
@@ -484,10 +484,9 @@ app.get("/reca/aboutus",(req,res)=>{
  app.get('/admin/orders/cancel/:id', restrictTo(['ADMIN']), wrapAsync(async (req, res) => {
   try {
     const orderId = req.params.id;
-     console.log(orderId);
+     
     // Find the order by ID
     const order = await Order.findById(orderId);
-    console.log(order);
     if (!order) {
       return res.json({ success: false, error: 'Order not found' });
     }
@@ -495,7 +494,7 @@ app.get("/reca/aboutus",(req,res)=>{
     const user = await User.findByIdAndUpdate(order.user, {
       $pull: { orders: orderId }
     }, { new: true });
-    console.log(user);
+   
     // Update the availability of each product in the order
     await Promise.all(order.products.map(async (productId) => {
       await Product.findByIdAndUpdate(productId, {
@@ -504,7 +503,7 @@ app.get("/reca/aboutus",(req,res)=>{
     }));
     // Remove the order from the Order schema
     const deletedOrder = await Order.findByIdAndDelete(orderId);
-      console.log(deletedOrder);
+     
     if (!deletedOrder) {
       console.error(`Failed to delete order: ${orderId}`);
       return res.json({ success: false, error: 'Failed to delete order' });
