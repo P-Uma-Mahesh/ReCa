@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const text = 'Welcome to RECA!';
+    const text = 'Welcome to ReCa!';
     let i = 0;
     const speed = 100; // typing speed in milliseconds
 
