@@ -110,7 +110,7 @@ body{
     left: 0;
     width: 90%;
     height: 90%;
-    background-image: url('../others/productsBackground.jpg');
+    background-image: url('../others/image.png');
     background-size: cover;
     background-position: center;
     filter: blur(3px); /* Optional: Add blur effect to the background */
