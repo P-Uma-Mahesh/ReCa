@@ -112,10 +112,10 @@ reca/
 
 ## 👨‍💻 Team
 
-- **G. Abhishek** - abhishekgajula2018@gmail.com
-- **S. Siddharth** - siddharth.s2404@gmail.com
-- **B. Sainadha Reddy** - sainadhareddybusireddy2004@gmail.com
-- 
+- **G. Abhishek**        - abhishekgajula2018@gmail.com
+- **S. Siddharth**       - siddharth.s2404@gmail.com
+- **B. Sainadha Reddy**  - sainadhareddybusireddy2004@gmail.com
+- **T.P.S. Uma Mahesh**  - tpoornamahesh@gmail.com
 ---
 
 ## 🤝 Contributing
