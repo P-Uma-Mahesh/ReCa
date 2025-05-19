@@ -1,4 +1,4 @@
-
+//demo listings
 const sampleListings = [
     {
         title: "Vintage Chair",
